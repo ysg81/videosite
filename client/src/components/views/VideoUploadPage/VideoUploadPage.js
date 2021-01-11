@@ -37,20 +37,21 @@ function VideoUploadPage() {
     const onCategoryChange = (e) => {
         setCategory(e.target.value)
     }
-    // const onDrop = (files) => {
-    //     let formData = new FormData;
-    //     const config = {
-    //         header : {'content-type': 'multipart/form-data'}
-    //     }
-    //     formData.append("file", files[0])
-    //     Axios.post('/api/video/uploadfiles/', formData, config)
-    //     .then(response=>{
+    const onDrop = (files) => {
+        let formData = new FormData;
+        const config = {
+            header : {'content-type': 'multipart/form-data'}
+        }
+        formData.append("file", files[0])
+        Axios.post('/api/video/uploadfiles/', formData, config)
+        .then(response=>{
             
-    //         if(response.data.success){
+            if(response.data.success){
+                console.log(response.data)
     //             let variable={
     //                 url:response.data.url,
     //                 fileName:response.data.fileName
-    //             }
+                // }
                 
     //             Axios.post('api/video/thumbnail', variable)
     //             .then(response => {
@@ -60,11 +61,11 @@ function VideoUploadPage() {
     //                     alert('썸네일 생성에 실패하였습니다.')
     //                 }
     //             })
-    //         }else{
-    //             alert('비디오 업로드를 실패했습니다.')
-    //         }
-    //     })
-    // }
+            }else{
+                alert('비디오 업로드를 실패했습니다.')
+            }
+        })
+    }
     return (
         <div style={{maxWidth:'700px', margin:'2rem auto'}}>
             <div style={{textAlign:'center', marginBottom:'2rem'}}>
@@ -75,10 +76,9 @@ function VideoUploadPage() {
                     {/* Drop Zone */}
 
                     <Dropzone
-                        onDrop
-                        // ={onDrop}
+                        onDrop={onDrop}
                         multiple={false}
-                        maxSize={1000000}>
+                        maxSize={100000000}>
                         {({getRootProps, getInputProps}) => (
                             <div style={{width:'300px', height:'240px', border:'1px solid lightgray', display:'flex',alignItems:'center', justifyContent:'center'}} {...getRootProps()}>
                                 <input {...getInputProps()}></input>
