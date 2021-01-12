@@ -2,6 +2,7 @@ import Axios from 'axios'
 import React,{useState} from 'react'
 import {useSelector} from 'react-redux';
 import SingleComment from './SingleComment'
+import ReplyComment from './ReplyComment' 
 
 function Comment(props) {
 
@@ -43,14 +44,24 @@ function Comment(props) {
         <div>
             <br/>
             <p>Replies</p>
-            <hr/>
+            <hr style = {{border:'2px solid black'}}/>
 
             {/* Comment List */}
 
 
             {props.commentLists && props.commentLists.map((comment, index) => (
-                (!Comment.responseTo &&
-                    <SingleComment refreshFunction={props.refreshFunction} comment={comment} postId={videoId}/>
+                (!comment.responseTo &&
+                    <React.Fragment>
+                        <SingleComment
+                            refreshFunction={props.refreshFunction}
+                            comment={comment}
+                            postId={videoId}/>
+                        <ReplyComment
+                            refreshFunction={props.refreshFunction}
+                            parentCommentId={comment._id}
+                            commentLists={props.commentLists}
+                            postId={videoId}/>
+                    </React.Fragment>
                 )
             ))}
 

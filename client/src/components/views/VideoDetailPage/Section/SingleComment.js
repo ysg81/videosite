@@ -37,6 +37,7 @@ function SingleComment(props) {
                 console.log(response.data)
 
                 props.refreshFunction(response.data.result)
+                setOpenReply(!OpenReply)
                 setCommentValue("")
             }else{
                 alert('코멘트를 저장하지 못하였습니다.')
@@ -66,7 +67,7 @@ function SingleComment(props) {
                         style={{width:'100%', borderRadius:'5px'}}
                         onChange={onHandleChange}
                         value={CommentValue}
-                        placeholder="코맨트를 작성해 주세요">
+                        placeholder="답글을 입력해 주세요">
 
                     </textarea>
                     <br/>
