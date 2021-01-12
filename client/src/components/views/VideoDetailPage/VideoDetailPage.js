@@ -44,8 +44,9 @@ function VideoDetailPage(props) {
                 </Col>
 
                 <Col lg={6} xs={24}>
-                        <SideVideo/>
+                    <SideVideo/>
                 </Col>
+
             </Row>
         );
     }
