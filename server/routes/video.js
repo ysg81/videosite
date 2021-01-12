@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 // const { Video } = require("../models/Video");
 
-const { auth } = require("../middleware/auth");
+// const { auth } = require("../middleware/auth");
 const multer = require("multer");
 var ffmpeg = require("fluent-ffmpeg");
 
@@ -42,9 +42,11 @@ router.post('/thumbnail', (req, res)=>{
     let fileDuration = ""
 
     //비디오 정보 가져오기
+    ffmpeg.setFfmpegPath('C:\\ffmpeg-4.3.1-2021-01-01-full_build\\bin\\ffmpeg.exe')
     ffmpeg.ffprobe(req.body.url, function(err, metadata){
         console.dir(metadata);
         console.log(metadata.format.duration);
+
         fileDuration = metadata.format.duration
     });
 
